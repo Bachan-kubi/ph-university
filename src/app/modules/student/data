@@ -1,0 +1,37 @@
+{
+    
+  "student": {
+    "id": "13783789700",
+    "password": "fjsdkjfadjfjjafj",
+    "name": {
+      "firstName": "Kubi",
+      "middleName": "yongdi",
+      "lastName": "Sangma"
+    },
+    "gender": "Male",
+    "DOB": "2000-01-01",
+    "isMarried": true,
+    "email": "ooqwep@anexample.com",
+    "contactNo": "123-456-7890",
+    "emergencyContactNo": "09876541",
+    "permanentAddress": "birisiri",
+    "presentAddress": "456 Elm Street, Currentcity, CC 67890",
+    "bloodGroup": "O+",
+    "guardian": {
+      "fathersName": "James Doe",
+      "fathersOccupation": "Engineer",
+      "fathersContactNo": "123-456-7891",
+      "mothersName": "Jane Doe",
+      "mothersOccupation": "Teacher",
+      "mothersContactNo": "123-456-7892"
+    },
+    "localGuardian": {
+      "name": "Robert Smith",
+      "occupation": "Doctor",
+      "contactNo": "123-456-7893",
+      "address": "789 Maple Street, Nearbytown, NT 13579"
+    },
+    "profileImg": "https://example.com/profileimg/johndoe.jpg",
+    "isActive": "active"
+  }
+}
