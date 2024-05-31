@@ -8,7 +8,7 @@ import {
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 // import config from '../../config';
-import { func } from 'joi';
+import { date, func } from 'joi';
 import config from '../../config';
 
 const userNameSchema = new Schema<TUserName>({
@@ -46,7 +46,6 @@ const localGuardianSchema = {
 };
 
 const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
-  id: { type: String, required: [true, "ID is required"], unique: true },
   user: {
     type: Schema.Types.ObjectId,
     required: [true, "User Id required"],
@@ -65,7 +64,7 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
     },
     required: true,
   },
-  DOB: { type: String },
+  DOB: { type: Date },
   isMarried: {
     type: Boolean,
   },
@@ -91,15 +90,6 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
     required: true,
   },
   profileImg: { type: String, required: true },
-  // isActive: {
-  //   type: String,
-  //   enum: ['active', 'blocked'],
-  //   default: 'active',
-  // },
-  isDeleted: {
-    type: Boolean,
-    default: false,
-  },
 }, {
   toJSON: {virtuals: true}
 });
