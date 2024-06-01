@@ -90,6 +90,7 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
     required: true,
   },
   profileImg: { type: String, required: true },
+  academicSemister:{type: Schema.Types.ObjectId, ref: 'AcademicSemister'}
 }, {
   toJSON: {virtuals: true}
 });

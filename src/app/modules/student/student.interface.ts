@@ -36,7 +36,7 @@ export type TStudent = {
   guardian: TGuardian;
   localGuardian: TlocalGuardian;
   profileImg: string;
-  // isActive: 'active' | 'blocked';
+  academicSemister: Types.ObjectId;
   isDeleted: boolean;
 };
 

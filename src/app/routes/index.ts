@@ -9,6 +9,9 @@ const moduleRoutes = [
     {path: '/students', route: studentRouters},
     {path: '/users', route: userRouters},
     {path: '/academic-semister', route: academicRouter},
+    {path: '/', route: academicRouter},
+    {path: '/:semisterId', route: academicRouter},
+    {path: '/update/:semisterId', route: academicRouter},
 ];
 moduleRoutes.forEach(route=>routers.use(route.path, route.route));
 //02 normal routes
@@ -16,4 +19,4 @@ moduleRoutes.forEach(route=>routers.use(route.path, route.route));
 // routers.use('/users', userRouters);
 
 
-export default routers; 
+export default routers;

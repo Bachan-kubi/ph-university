@@ -20,4 +20,17 @@ const academicSemisterSchema = new Schema<TAcademicSemister>({
     timestamps: true
 });
 
+
+// validate data before saving same data
+academicSemisterSchema.pre('save', async function(next){
+const isSemisterExist = await AcademicSemister.findOne({
+    year: this.year,
+    name: this.name
+});
+if(isSemisterExist){
+    throw new Error(`Year ${this.year}  and ${this.name} semister already exist!`);
+}
+next();
+});
+
 export const AcademicSemister = model<TAcademicSemister>("AcademicSemister", academicSemisterSchema);
