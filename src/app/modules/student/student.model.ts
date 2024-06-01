@@ -64,7 +64,7 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
     },
     required: true,
   },
-  DOB: { type: Date },
+  DOB: { type: String },
   isMarried: {
     type: Boolean,
   },

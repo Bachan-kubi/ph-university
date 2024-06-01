@@ -11,7 +11,6 @@ const moduleRoutes = [
     {path: '/academic-semister', route: academicRouter},
     {path: '/', route: academicRouter},
     {path: '/:semisterId', route: academicRouter},
-    {path: '/update/:semisterId', route: academicRouter},
 ];
 moduleRoutes.forEach(route=>routers.use(route.path, route.route));
 //02 normal routes
