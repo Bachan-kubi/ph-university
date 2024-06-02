@@ -3,7 +3,7 @@ import { User } from "./user.model";
 
 
 // find last studnet id
-const findLastStudent = async () => {
+const findLastStudentId = async () => {
     const lastStudent = await User.findOne(
         { role: 'student' },
         {
@@ -13,14 +13,26 @@ const findLastStudent = async () => {
     )
     .sort({createdAt: -1})
     .lean()
-    return lastStudent?.id? lastStudent.id.substring(6) : undefined;
-}
-// generate student id
+    return lastStudent?.id? lastStudent.id : undefined;
+};
+// generate student id = 2023020001
 export const generateStudentId = async (payload: TAcademicSemister) => {
-    const currentId = await findLastStudent() || (0).toString();
+    // right upto below line
+    // let currentId = (await findLastStudent())||(0).toString();
+    // change to manage other semister year and code
+    let currentId = (0).toString();
+    const lastStudentId = await findLastStudentId();
+    const lastStudentSemisterCode = lastStudentId?.substring(4,6);
+    const lastStudnetSemisterYear = lastStudentId?.substring(0,4);
+    const currentStudnetSemisterCode = payload.code;
+    const currentStudnetSemisterYear = payload.year;
+    if(lastStudentId && lastStudentSemisterCode === currentStudnetSemisterCode && lastStudnetSemisterYear === currentStudnetSemisterYear ){
+        currentId = lastStudentId.substring(6);
+    }
     let incrementId = (Number(currentId) + 1).toString().padStart(4, '0');
     incrementId = `${payload.year}${payload.code}${incrementId}`;
     return incrementId;
+    
 };
 
 
