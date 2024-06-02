@@ -46,6 +46,11 @@ const localGuardianSchema = {
 };
 
 const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
+  id: {
+    type: String,
+    required: [true, 'ID is required'],
+    unique: true,
+  },
   user: {
     type: Schema.Types.ObjectId,
     required: [true, "User Id required"],
@@ -90,7 +95,7 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
     required: true,
   },
   profileImg: { type: String, required: true },
-  academicSemister:{type: Schema.Types.ObjectId, ref: 'AcademicSemister'}
+  admissionSemister:{type: Schema.Types.ObjectId, ref: 'AcademicSemister'}
 }, {
   toJSON: {virtuals: true}
 });

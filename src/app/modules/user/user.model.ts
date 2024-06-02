@@ -5,7 +5,7 @@ import config from "../../config";
 import bcrypt from 'bcrypt';
 
 const userSchema = new Schema<Tuser>({
-    id: {type: String, required: true},
+    id: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     needPasswordChange: {type: Boolean, default: true},
     role: {type: String, enum: ['student', 'faculty', 'admin']},
