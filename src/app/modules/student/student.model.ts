@@ -10,6 +10,8 @@ import bcrypt from 'bcrypt';
 // import config from '../../config';
 import { date, func } from 'joi';
 import config from '../../config';
+import { AcademicDepartment } from '../academicDepartment/academicDepartment.model';
+import { AcademicSemister } from '../academicSemister/academicSemister.model';
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -95,7 +97,8 @@ const studentSchema = new Schema<TStudent, StudentModel, StudentMethod>({
     required: true,
   },
   profileImg: { type: String, required: true },
-  admissionSemister:{type: Schema.Types.ObjectId, ref: 'AcademicSemister'}
+  admissionSemister:{type: Schema.Types.ObjectId, ref: AcademicSemister},
+  academicDepartment: {type: Schema.Types.ObjectId, ref: AcademicDepartment}
 }, {
   toJSON: {virtuals: true}
 });

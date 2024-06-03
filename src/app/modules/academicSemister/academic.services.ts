@@ -1,3 +1,5 @@
+import httpStatus from "http-status";
+import appError from "../../Error/appError";
 import { AcademicSemisterNameCodeMapper } from "./academic.constant";
 import { TAcademicSemister } from "./academicSemister.interface";
 import { AcademicSemister } from "./academicSemister.model";
@@ -5,7 +7,7 @@ import { AcademicSemister } from "./academicSemister.model";
 const createAcademicSemisterIntoDB = async (payload: TAcademicSemister) => {
     
     if (AcademicSemisterNameCodeMapper[payload.name] !== payload.code) {
-        throw new Error(`Academic name and code doesnt match!`);
+        throw new appError(httpStatus.NOT_FOUND,`Academic name and code doesnt match!`);
     }
     const result = await AcademicSemister.create(payload);
     return result;

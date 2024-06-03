@@ -1,6 +1,8 @@
 import { Schema, model } from "mongoose";
 // import { Tuser } from "./user.interface";
 import { TAcademicSemister, TAcademicSemisterCode, TAcademicSemisterName, TMonth } from "./academicSemister.interface";
+import appError from "../../Error/appError";
+import httpStatus from "http-status";
 
 
 const Months: TMonth[] = [
@@ -28,7 +30,7 @@ const isSemisterExist = await AcademicSemister.findOne({
     name: this.name
 });
 if(isSemisterExist){
-    throw new Error(`Year ${this.year}  and ${this.name} semister already exist!`);
+    throw new appError(httpStatus.NOT_FOUND,`Year ${this.year}  and ${this.name} semister already exist!`);
 }
 next();
 });
