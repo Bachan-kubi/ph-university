@@ -31,7 +31,11 @@
       "contactNo": "123-456-7893",
       "address": "789 Maple Street, Nearbytown, NT 13579"
     },
+    "isDeleted": false,
     "profileImg": "https://example.com/profileimg/johndoe.jpg",
     "isActive": "active"
   }
 }
+
+
+

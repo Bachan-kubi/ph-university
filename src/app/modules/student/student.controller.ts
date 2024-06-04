@@ -27,9 +27,10 @@ const getSingleStudents = catchAsync(async (req, res) => {
     });
 });
 
+// 02
 const deleteStudent  = catchAsync(async(req, res)=>{
-    const { studentId } = req.params;
-    const result = await studentServices.isDeleteStudentsFromDB(studentId);
+    const  {studentId} = req.params;
+    const result = await studentServices.deleteStudentsFromDB(studentId);
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
@@ -37,6 +38,24 @@ const deleteStudent  = catchAsync(async(req, res)=>{
       data: result
     }); 
 });
+
+
+
+//01 - it works on object _id //
+// const deleteStudent = catchAsync(async (req, res) => {
+//   const {studentId} = req.params;
+//   console.log(studentId, 'cntr')
+//   const result = await studentServices.deleteStudentsFromDB(studentId);
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Student is deleted succesfully',
+//     data: result,
+//   });
+// });
+
+
+
 
 // update students
 const updateStudent = catchAsync(async (req, res)=>{

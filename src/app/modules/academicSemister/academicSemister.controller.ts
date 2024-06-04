@@ -26,7 +26,6 @@ const getAllAcademicSemister = catchAsync(async (req, res) => {
 
 const getSingleAcademicSemister = catchAsync(async(req, res)=>{
   const {semisterId}= req.params;
-  console.log(semisterId)
   const result = await AcademicServices.getSingleAcademicSemisterFromDB(semisterId);
   sendResponse(res, {
     statusCode: httpStatus.OK,
