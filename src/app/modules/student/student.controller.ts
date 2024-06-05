@@ -22,7 +22,7 @@ const getSingleStudents = catchAsync(async (req, res) => {
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Retrived successfull",
+      message: "Student Retrived successfull",
       data: result
     });
 });
@@ -60,12 +60,12 @@ const deleteStudent  = catchAsync(async(req, res)=>{
 // update students
 const updateStudent = catchAsync(async (req, res)=>{
     const {studentId} = req.params;
-    const updateData = req.body;
-    const result = await studentServices.updateStudentFromDB(studentId, updateData);
+    const {student} = req.body;
+    const result = await studentServices.updateStudentFromDB(studentId, student);
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "User updated successfully",
+      message: "Student updated successfully",
       data: result
     });
 });

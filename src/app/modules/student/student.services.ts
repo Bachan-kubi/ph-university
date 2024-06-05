@@ -24,13 +24,31 @@ const getAllStudentsFromDB = async () => {
   return result;
 };
 //getsingle student
-const getSingleStudentsFromDB = async (studentId: string) => {
+// 01 get single data with _id
+// const getSingleStudentsFromDB = async (id: string) => {
+//   // method-1
+//   // const result = await Student.findById(studentId) // for _id
+//   const result = await Student.findOne({id})// for custom id
+//   .populate('admissionSemister').populate({
+//     path: 'academicDepartment',
+//     populate: { path: 'academicFaculty' }
+//   });
+//   // const result = await Student.aggregate([
+//   //   {$match: {id: id}}
+//   // ])
+//   return result;
+// };
+
+
+// 02- get single data with custom id
+const getSingleStudentsFromDB = async (id: string) => {
   // method-1
-  const result = await Student.findById(studentId)
-  .populate('admissionSemister').populate({
-    path: 'academicDepartment',
-    populate: { path: 'academicFaculty' }
-  });
+  // const result = await Student.findById(studentId) // for _id
+  const result = await Student.findOne({ id })// for custom id
+    .populate('admissionSemister').populate({
+      path: 'academicDepartment',
+      populate: { path: 'academicFaculty' }
+    });
   // const result = await Student.aggregate([
   //   {$match: {id: id}}
   // ])
@@ -39,12 +57,11 @@ const getSingleStudentsFromDB = async (studentId: string) => {
 
 //01 delete
 const deleteStudentsFromDB = async (id: string) => {
-  console.log('service', id);
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
     const deletedStudent = await Student.findOneAndUpdate(
-      {id},
+      { id },
       { isDeleted: true },
       { new: true, session },
     );
@@ -109,16 +126,46 @@ const deleteStudentsFromDB = async (id: string) => {
 //   }
 // };
 
+// update 01
+const updateStudentFromDB = async (id: string, payload: Partial<TStudent>) => {
+  let {name, guardian, localGuardian, ...remainingStudentsData} = payload;
+  const modifiedStudentData: Record<string, unknown> = {...remainingStudentsData}
 
-const updateStudentFromDB = async (id: string, updateData: Partial<TStudent>) => {
-  const result = await Student.findByIdAndUpdate(
-    // { _id: new Types.ObjectId(id) },
-    { id },
-    { $set: updateData },
-    { new: true }
+  if(name && Object.keys(name).length){
+    for(const [key, value] of Object.entries(name)){
+      modifiedStudentData[`name.${key}`] = value;
+    }
+  };
+  if(guardian && Object.keys(guardian).length){
+    for(const [key, value] of Object.entries(guardian)){
+      modifiedStudentData[`guardian.${key}`] = value;
+    }
+  };
+  if(localGuardian && Object.keys(localGuardian).length){
+    for(const [key, value] of Object.entries(localGuardian)){
+      modifiedStudentData[`localGuardian.${key}`] = value;
+    }
+  };
+
+  console.log(modifiedStudentData);
+  const result = await Student.findOneAndUpdate(
+    {id}, 
+    modifiedStudentData, 
+    {new: true, runValidators: true}
   );
   return result;
 }
+
+// update-02
+// const updateStudentFromDB = async (id: string, updateData: Partial<TStudent>) => {
+//   const result = await Student.findOneAndUpdate(
+//     // { _id: new Types.ObjectId(id) },
+//     { id },
+//     { $set: updateData },
+//     { new: true }
+//   );
+//   return result;
+// }
 
 export const studentServices = {
   // createStudentIntoDB,
