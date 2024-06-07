@@ -1,6 +1,6 @@
 import mongoose, { Types } from 'mongoose';
 import { TStudent } from './student.interface';
-import appError from '../../Error/appError';
+import AppError from '../../Error/AppError';
 import httpStatus from 'http-status';
 import { User } from '../user/user.model';
 import { Student } from './student.model';
@@ -67,7 +67,7 @@ const deleteStudentsFromDB = async (id: string) => {
     );
     console.log(deletedStudent, "deleted student")
     if (!deletedStudent) {
-      throw new appError(httpStatus.BAD_REQUEST, 'Failed to delete student');
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete student');
     }
     const userId = deletedStudent.user;
     const deletedUser = await User.findByIdAndUpdate(
@@ -76,7 +76,7 @@ const deleteStudentsFromDB = async (id: string) => {
       { new: true, session },
     );
     if (!deletedUser) {
-      throw new appError(httpStatus.BAD_REQUEST, 'Failed to delete user');
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete user');
     }
     await session.commitTransaction();
     await session.endSession();

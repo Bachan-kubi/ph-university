@@ -12,6 +12,7 @@ if (!process.env.PORT || !process.env.DATABASE_URI) {
 
 
 export default {
+  NODE_ENV: process.env.NODE_ENV,
   port: process.env.PORT,
   database_uri: process.env.DATABASE_URI,
   bcrypt_salt_round: process.env.BCRYPT_SALT_ROUND,
