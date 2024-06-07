@@ -1,6 +1,5 @@
 import { TErrorSources } from "../interface/error";
 
-
 const handleDuplicateErrors = (err: any)=>{
     const match = err.message.match(/"([^"]*)"/);
     const extractedMsg = match && match[1]

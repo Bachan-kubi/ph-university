@@ -15,8 +15,17 @@ import { Student } from './student.model';
 //   const result = classStudent.save();
 //   return result;
 // };
+
+
 // get all students
-const getAllStudentsFromDB = async () => {
+const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
+  // {email: {$regex: query.searchTerm, $options: i}}
+  // {address: {$regex: query.searchTerm, $options: i}}
+  // {"name.firstName": {$regex: query.searchTerm, $options: i}}
+  let searchTerm = "";
+  if(query?.searchTerm){
+    searchTerm= query?.searchTerm as string;
+  }
   const result = await Student.find().populate('admissionSemister').populate({
     path: 'academicDepartment',
     populate: { path: 'academicFaculty' }

@@ -5,14 +5,14 @@ import { AcademicFaculty } from "../academicFaculty/academicFaculty.model";
 import AppError from "../../Error/AppError";
 import httpStatus from "http-status";
 
-
 export const academicDeaprtmentSchema = new Schema({
     name: { type: String, required: true, unique: true },
     // import ref field accordingly, if you put in '' u will get error
     academicFaculty: { type: Schema.Types.ObjectId, ref:  AcademicFaculty},
 }, { timestamps: true });
 
-//if department exist
+
+//01 if department exist, validation 
 // academicDeaprtmentSchema.pre('save', async function(next){
 //     const isDepartmentExist = await AcademicDepartment.findOne({
 //         name: this.name

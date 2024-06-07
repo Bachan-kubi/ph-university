@@ -7,7 +7,10 @@ import catchAsync from '../../utls/catchAsync';
 
 
 const getAllStudents = catchAsync(async (req, res) => {
-    const result = await studentServices.getAllStudentsFromDB();
+  // seaching option added
+  // console.log(req.query)
+
+    const result = await studentServices.getAllStudentsFromDB(req.query);
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,

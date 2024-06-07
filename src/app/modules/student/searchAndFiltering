@@ -1,0 +1,8 @@
+// {
+    // $or: ['email', 'name.firstName', 'presentAddress'].map((field)=>{
+    //   [field]: {$regex: searchTerm, $options: "i"}
+    // })
+//     $or: ['email', 'name.firstName', 'presentAddress'].map((field)=>({
+//       [field]: {$regex: searchTerm, $options: "i"}
+//     }))
+//   }
