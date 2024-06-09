@@ -1,7 +1,11 @@
-// {
-    // $or: ['email', 'name.firstName', 'presentAddress'].map((field)=>{
-    //   [field]: {$regex: searchTerm, $options: "i"}
-    // })
+// // {email: {$regex: query.searchTerm, $options: i}}
+//   // {address: {$regex: query.searchTerm, $options: i}}
+//   // {"name.firstName": {$regex: query.searchTerm, $options: i}}
+
+//{
+//     $or: ['email', 'name.firstName', 'presentAddress'].map((field)=>{
+//       [field]: {$regex: searchTerm, $options: "i"}
+//     })
 //     $or: ['email', 'name.firstName', 'presentAddress'].map((field)=>({
 //       [field]: {$regex: searchTerm, $options: "i"}
 //     }))
