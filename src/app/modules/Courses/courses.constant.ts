@@ -1,0 +1,1 @@
+export const courseSearchabelFeilds = ["title", "preifx", "code"];

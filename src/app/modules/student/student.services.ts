@@ -108,7 +108,8 @@ const getAllStudentsFromDB = async (query: Record<string, unknown>) => {
 const getSingleStudentsFromDB = async (id: string) => {
   // method-1
   // const result = await Student.findById(studentId) // for _id
-  const result = await Student.findOne({ id })// for custom id
+  // const result = await Student.findOne({id})// for custom id
+  const result = await Student.findById(id)// for mongoId
     .populate('admissionSemister').populate({
       path: 'academicDepartment',
       populate: { path: 'academicFaculty' }
@@ -124,8 +125,8 @@ const deleteStudentsFromDB = async (id: string) => {
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-    const deletedStudent = await Student.findOneAndUpdate(
-      { id },
+    const deletedStudent = await Student.findByIdAndUpdate(
+      id ,
       { isDeleted: true },
       { new: true, session },
     );
@@ -212,8 +213,8 @@ const updateStudentFromDB = async (id: string, payload: Partial<TStudent>) => {
   };
 
   console.log(modifiedStudentData);
-  const result = await Student.findOneAndUpdate(
-    { id },
+  const result = await Student.findByIdAndUpdate(
+     id ,
     modifiedStudentData,
     { new: true, runValidators: true }
   );
