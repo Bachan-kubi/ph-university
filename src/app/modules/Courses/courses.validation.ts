@@ -7,13 +7,15 @@ const createCoursesValidatonSchema = z.object({
     body: z.object({
         title: z.string(), 
     prefix: z.string(),
-    code: z.number(),
+    code: z.string(),
     credit: z.number(),
     isDeleted: z.boolean().optional(),
     preRequisiteCourses:z.array(preRequisiteCoursesValidationSchema).optional()
     })
 });
+const updateCourseValidatonSchema = createCoursesValidatonSchema.partial();
 
 export const coursesValidation = {
-    createCoursesValidatonSchema
+    createCoursesValidatonSchema,
+    updateCourseValidatonSchema
 }

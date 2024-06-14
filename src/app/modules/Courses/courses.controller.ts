@@ -4,7 +4,6 @@ import sendResponse from "../../utls/sendResponse";
 import { coursesServices } from "./courses.services";
 
 const createCourses = catchAsync(async (req, res) => {
-
     const result = await coursesServices.createCoursesIntoDB(req.body);
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -22,7 +21,6 @@ const createCourses = catchAsync(async (req, res) => {
       data: result,
     });
   });
-  
   const getSingleCourses = catchAsync(async(req, res)=>{
     const {id}= req.params;
     const result = await coursesServices.getSingleCoursesFromDB(id);
@@ -42,23 +40,25 @@ const createCourses = catchAsync(async (req, res) => {
         message: "Single Courses deleted successfully",
         data: result,
       });
-  })
+  });
+
   
-//   const updateCourses= catchAsync(async(req, res)=>{
-//     const {id} = req.params;
-//     const payload = req.body;
-//     const result = await coursesServices.;
-//     sendResponse(res, {
-//       statusCode: httpStatus.OK,
-//       success: true,
-//       message: `Single Academic Faculty updated successfully`,
-//       data: result,
-//     });  
-//   });
+  const updateCourses= catchAsync(async(req, res)=>{
+    const {id} = req.params;
+    const payload = req.body;
+    const result = await coursesServices.updateCoursesInDB(id, payload);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: `Single Academic Faculty updated successfully`,
+      data: result,
+    });  
+  });
 
   export const courseController = {
     createCourses,
     getAllCourses,
     getSingleCourses,
-    deleteCourses
+    deleteCourses, 
+    updateCourses
   }

@@ -13,8 +13,6 @@ const coursesSchema = new Schema<Tcourses>({
     credit: {type: Number, required: true, tri: true },
     isDeleted: {type:Boolean, default: false},
     preRequisiteCourses: [preRequisiteCoursesSchema]
-},{
-    timestamps: true
 });
 
 export const Courses = model<Tcourses>("Courses", coursesSchema);

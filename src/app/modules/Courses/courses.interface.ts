@@ -6,7 +6,7 @@ export type Tcourses = {
     code: string;
     credit: number;
     isDeleted?: boolean;
-    preRequisiteCourses: [];
+    preRequisiteCourses: [TpreRequisiteCourses];
 }
 export type TpreRequisiteCourses = {
     course: Types.ObjectId;
