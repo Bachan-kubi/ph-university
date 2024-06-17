@@ -5,6 +5,7 @@ import { academicRouter } from "../modules/academicSemister/academicSemister.rou
 import { academicFacultyRoutes } from "../modules/academicFaculty/academicFaculty.routes";
 import { academicDepartmentRoutes } from "../modules/academicDepartment/academicDepartment.routes";
 import { coursesRouter } from "../modules/Courses/courses.route";
+import { FacultyRoutes } from "../modules/Faculty/faculty.route";
 
 const routers = Router();
 // 01 moduler routes
@@ -15,6 +16,7 @@ const moduleRoutes = [
     {path: '/academic-faculty', route: academicFacultyRoutes},
     {path: '/academic-department', route: academicDepartmentRoutes},
     {path: '/courses', route: coursesRouter},
+    {path: '/faculties', route: FacultyRoutes},
 ];
 moduleRoutes.forEach(route=>routers.use(route.path, route.route));
 //02 normal routes

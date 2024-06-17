@@ -1,8 +1,7 @@
-import { string } from "joi";
 import QueryBuilder from "../../builder/QueryBuilder";
 import { courseSearchabelFeilds } from "./courses.constant";
-import { Tcourses } from "./courses.interface";
-import { Courses } from "./courses.model"
+import { Tcourses, TcoursesFaculties } from "./courses.interface";
+import { CourseFaculty, Courses } from "./courses.model"
 import mongoose from "mongoose";
 import AppError from "../../Error/AppError";
 import httpStatus from "http-status";
@@ -39,7 +38,7 @@ const deleteCoursesFromDB = async (id: string) => {
         { new: true }
     );
     return result;
-}
+};
 const updateCoursesInDB = async (id: string, payload: Partial<Tcourses>) => {
     const { preRequisiteCourses, ...remainingCourseData } = payload;
     console.log(preRequisiteCourses);
@@ -79,14 +78,34 @@ const updateCoursesInDB = async (id: string, payload: Partial<Tcourses>) => {
             const result = await Courses.findById(id).populate("preRequisiteCourses.course");
             return result;
         }
-        await session .commitTransaction();
+        await session.commitTransaction();
         await session.endSession();
     } catch (error) {
         await session.abortTransaction();
         await session.endSession();
         throw new AppError(httpStatus.BAD_REQUEST, "Failed to update basic info!")
     }
-
+};
+const assignFacultiesWithCourseIntoDB = async (id: string, payload: Partial<TcoursesFaculties>) => {
+    const result = await CourseFaculty.findByIdAndUpdate(
+        id,
+        {
+            course: id,
+            $addToSet: { faculties: { $each: payload } }
+        },
+        { upsert: true, new: true }
+    );
+    return result;
+}
+const removeFacultiesWithCourseIntoDB = async (id: string, payload: Partial<TcoursesFaculties>) => {
+    const result = await CourseFaculty.findByIdAndUpdate(
+        id,
+        {
+            $pull: { faculties: { $in: payload } }
+        },
+        { new: true }
+    );
+    return result;
 }
 
 
@@ -95,5 +114,7 @@ export const coursesServices = {
     getAllCoursesFromDB,
     getSingleCoursesFromDB,
     deleteCoursesFromDB,
-    updateCoursesInDB
+    updateCoursesInDB,
+    assignFacultiesWithCourseIntoDB,
+    removeFacultiesWithCourseIntoDB
 }
